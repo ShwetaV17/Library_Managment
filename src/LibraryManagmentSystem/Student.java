@@ -6,28 +6,28 @@ import java.util.Scanner;
 public class Student
 {
     String studentName;
-    String registrationNum;
+    int registrationNum;
 
     public Student(){};
-    public Student(String studentName, String registrationNum) {
+    public Student(String studentName, int registrationNum) {
         this.studentName = studentName;
         this.registrationNum = registrationNum;
 
     }
 
-    public void setStudentNameName(String name) {
+    public void setStudentName(String name) {
         this.studentName = name;
     }
 
-    public void setRegistrationNum(String regnum) {
-        this.registrationNum = regnum;
+    public void setRegistrationNum(int regNum) {
+        this.registrationNum = regNum;
     }
 
     public String getStudentName() {
         return studentName;
     }
 
-    public String getRegistrationNum() {
+    public int getRegistrationNum() {
         return registrationNum;
     }
 
@@ -36,29 +36,31 @@ public class Student
         Scanner sc = new Scanner(System.in);
         Student student = new Student();
 
-        sc.nextLine();
+   //     sc.nextLine();
         System.out.println("Enter the student name:");
         String name =sc.nextLine();
-        student.setStudentNameName(name);
+        student.setStudentName(name);
 
         System.out.println("Enter the register number:");
-        String regnum =sc.nextLine();
-        student.setRegistrationNum(regnum);
+        int regNum =sc.nextInt();
+        student.setRegistrationNum(regNum);
 
         return student;
     }
 
-    public void printStudentlist(List<Student> students)
+    public void printStudentList(List<Student> students)
     {
         for(Student student : students)
         {
-            printBook(student);
+            printStudent(student);
         }
     }
 
-    public void printBook(Student student)
+    public void printStudent(Student student)
     {
         
         System.out.println(student.getStudentName()+ " " + student.getRegistrationNum());
     }
+
+
 }

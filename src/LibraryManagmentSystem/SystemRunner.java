@@ -12,6 +12,8 @@ public class SystemRunner {
 
         List<Book> booklist = new ArrayList<>();
         List<Student> studentList = new ArrayList<>();
+        Student student = new Student();
+        Book book = new Book();
 
         do {
             menu.displaymenu();
@@ -35,23 +37,86 @@ public class SystemRunner {
                     break;
                 }
                 // Search a book
-                case 3:
-                {
+                case 3: {
                     new Book().SearchBook(booklist);
+                    break;
                 }
-               // Show all book
-                case 4:
-                {
+                // Show all book
+                case 4: {
                     System.out.println("            SHOWING ALL BOOKS      ");
-                    System.out.println("BookID"+ " " + "BookName"+ " " +"BookAuthor"+ " " +"BookQuantity");
+                    System.out.println("BookID" + " " + "BookName" + " " + "BookAuthor" + " " + "BookQuantity");
                     new Book().printBooklist(booklist);
+                    break;
                 }
                 //Register Student
-                case 5 :
-                {
+                case 5: {
                     studentList.add((new Student()).addStudent());
-                        new Student().printStudentlist(studentList);
+                    new Student().printStudentList(studentList);
+                    break;
                 }
+                //Check out
+                case 6: {
+                   System.out.println("Enter the registration number :");
+                    Scanner scc = new Scanner(System.in);
+                    int registerNum = scc.nextInt();
+                    System.out.println("CHECK OUT");
+                    for (Student students : studentList) {
+                        if (registerNum == students.getRegistrationNum()) {
+                            book.printBooklist(booklist);
+
+                            System.out.println("Enter bookId of book to be checkout");
+                            int bookID = scc.nextInt();
+
+                            for(Book books : booklist) {
+                                if(bookID == books.getBookId())
+                                {
+                                    System.out.println("Quantity of books to be wanted");
+                                    int resBook = scc.nextInt();
+
+                                int quantity = books.getBookQuantity() - resBook;
+                                books.setBookQuantity(quantity);
+
+                                System.out.println("Show all books");
+                                book.printBooklist(booklist);
+                            }}
+
+                        } else {
+                            System.out.println("Registration number is not present");
+                        }
+                    }
+                } break;
+                // Check in
+                case 7:
+                {
+                    System.out.println("Enter the registration number :");
+                    Scanner scc = new Scanner(System.in);
+                    int registerNum = scc.nextInt();
+                    System.out.println("CHECK IN");
+                    for (Student students : studentList) {
+                        if (registerNum == students.getRegistrationNum()) {
+                            book.printBooklist(booklist);
+
+                            System.out.println("Enter bookId of book to be checkin");
+                            int bookID = scc.nextInt();
+
+                            for(Book books : booklist) {
+                                if(bookID == books.getBookId())
+                                {
+                                    System.out.println("Quantity of books to be wanted");
+                                    int resBook = scc.nextInt();
+
+                                    int quantity = books.getBookQuantity() + resBook;
+                                    books.setBookQuantity(quantity);
+
+                                    System.out.println("Show all books");
+                                    book.printBooklist(booklist);
+                                }}
+
+                        } else {
+                            System.out.println("Registration number is not present");
+                        }
+                    }
+                } break;
             }
         }
         while (option != 0);
